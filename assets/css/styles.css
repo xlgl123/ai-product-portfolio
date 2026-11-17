@@ -16,6 +16,11 @@
   --max: 1180px;
 }
 
+.project-repository-links { display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 24px; }
+.project-repository-link { display:inline-flex;align-items:center;padding:10px 16px;border:1px solid #8c9b8990;border-radius:8px;background:#ffffffd9;color:#294c3b;font:600 13px/1.5 "Microsoft YaHei",sans-serif;letter-spacing:0;text-decoration:none; }
+.project-repository-link:hover { background:#e9f0e5;border-color:#678361; }
+.project-repository-link:focus-visible { outline:3px solid #82995e;outline-offset:4px; }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {

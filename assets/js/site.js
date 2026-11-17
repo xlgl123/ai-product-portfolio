@@ -394,5 +394,43 @@ function setupFilters() {
 document.addEventListener("DOMContentLoaded", () => {
   const slug = document.body.dataset.project;
   if (slug) renderDetail(slug);
+  addProjectRepositoryLinks(slug);
   setupFilters();
 });
+
+function addProjectRepositoryLinks(slug) {
+  const repositories = {
+    'secret-base': ['秘密基地', 'secret-base'],
+    'ob-adaptive': ['OB 自适应版本', 'ob-adaptive'],
+    miostudio: ['MioStudio', 'miostudio'],
+    hengqi: ['衡契', 'hengqi-contract-review'],
+    pianyu: ['片羽', 'pianyu-story-cuts'],
+    xingling: ['星澪', 'xingling'],
+    alingshell: ['AlingShell', 'alingshell']
+  };
+  const link = (label, repository) => {
+    const a = document.createElement('a');
+    a.href = 'https://github.com/xlgl123/' + repository;
+    a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.className = 'project-repository-link';
+    a.textContent = label + ' · GitHub ↗';
+    return a;
+  };
+  if (slug === 'tools') {
+    for (const [id, label, repository] of [
+      ['tk-notion', 'AlingNotion', 'alingnotion'],
+      ['tk-voice', 'AlingVoice', 'alingvoice'],
+      ['tk-shell', 'AlingShell', 'alingshell'],
+      ['tk-bridge', 'AlingBridge', 'alingbridge']
+    ]) {
+      const heading = document.querySelector('#' + id + ' .tk-heading');
+      if (!heading) continue;
+      const nav = document.createElement('div'); nav.className = 'project-repository-links';
+      nav.append(link(label, repository)); heading.after(nav);
+    }
+  } else if (repositories[slug]) {
+    const nav = document.createElement('div'); nav.className = 'project-repository-links';
+    nav.append(link(...repositories[slug]));
+    document.querySelector('main h1')?.after(nav);
+  }
+}
